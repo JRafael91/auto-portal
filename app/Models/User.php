@@ -44,4 +44,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function scopeWithOutAdmin($query)
+    {
+        return $query->where('email', '!=', 'admin@autoportal.com');
+    }
 }
