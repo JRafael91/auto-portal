@@ -35,7 +35,7 @@ class UserResource extends Resource
                 ->helperText('Correo electrónico del usuario')
                 ->required()
                 ->email()
-                ->unique()
+                ->unique(ignoreRecord: true)
                 ->validationMessages([
                     'required' => 'Correo electrónico es requerido',
                     'email' => 'Correo electrónico es inválido',
@@ -64,7 +64,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('name')->label('Nombre'),
                 Tables\Columns\TextColumn::make('email')->label('Correo electrónico')
                 ->icon('heroicon-m-envelope'),
-                Tables\Columns\TextColumn::make('rol'),
+                Tables\Columns\TextColumn::make('role'),
                 ])
             ->filters([
                 //
@@ -100,6 +100,6 @@ class UserResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery();
+        return parent::getEloquentQuery()->withOutAdmin();
     }
 }
