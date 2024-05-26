@@ -60,3 +60,9 @@ docker compose up -d
 ```
 
 Esto iniciará los contenedores en segundo plano.
+
+### 6. Crear usuario SuperAdmin
+
+```bash
+php artisan make:filament-user
+```
