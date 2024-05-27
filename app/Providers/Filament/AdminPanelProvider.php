@@ -18,6 +18,7 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Afsakar\FilamentOtpLogin\FilamentOtpLoginPlugin;
+use App\Filament\Pages\Auth\RequestPasswordReset;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -28,7 +29,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('/')
             ->login()
-            ->passwordReset()
+            ->passwordReset(RequestPasswordReset::class)
             ->profile()
             ->colors([
                 'primary' => Color::Amber,
