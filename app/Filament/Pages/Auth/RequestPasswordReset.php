@@ -32,7 +32,6 @@ class RequestPasswordReset extends BaseRequestPasswordReset
             return;
         }
         $data = $this->form->getState();
-        dd($data);
         $status = Password::broker(Filament::getAuthPasswordBroker())->sendResetLink(
             $data,
             function (CanResetPassword $user, string $token): void {
