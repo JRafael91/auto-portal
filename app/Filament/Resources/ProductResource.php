@@ -13,6 +13,17 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Support\RawJs;
+use Filament\Tables\Filters\Filter;
+
+
+use Filament\Tables\Filters\QueryBuilder;
+use Filament\Tables\Filters\QueryBuilder\Constraints\BooleanConstraint;
+use Filament\Tables\Filters\QueryBuilder\Constraints\DateConstraint;
+use Filament\Tables\Filters\QueryBuilder\Constraints\NumberConstraint;
+use Filament\Tables\Filters\QueryBuilder\Constraints\RelationshipConstraint;
+use Filament\Tables\Filters\QueryBuilder\Constraints\RelationshipConstraint\Operators\IsRelatedToOperator;
+use Filament\Tables\Filters\QueryBuilder\Constraints\SelectConstraint;
+use Filament\Tables\Filters\QueryBuilder\Constraints\TextConstraint;
 
 class ProductResource extends Resource
 {
@@ -75,13 +86,13 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('code')->label('Código'),
-                Tables\Columns\TextColumn::make('name')->label('Nombre'),
+                Tables\Columns\TextColumn::make('code')->label('Código')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('name')->label('Nombre')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('price')->label('Precio')
                 ->prefix('$')->numeric(decimalPlaces: 2),
             ])
             ->filters([
-                //
+               
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
