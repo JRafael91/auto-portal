@@ -65,7 +65,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email')->label('Correo electrónico')
                 ->icon('heroicon-m-envelope'),
                 Tables\Columns\TextColumn::make('role'),
-                ])
+            ])
             ->filters([
                 //
             ])
