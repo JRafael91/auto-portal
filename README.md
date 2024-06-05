@@ -60,3 +60,21 @@ docker compose up -d
 ```
 
 Esto iniciará los contenedores en segundo plano.
+
+### 6. Verificar conexión entre la aplicación y la base de datos
+```bash
+php artisan db:show
+```
+
+### 7. Crear usuario SuperAdmin
+
+```bash
+php artisan make:filament-user
+```
+
+### 8. Correr los Seeder para la creación de productos.
+```bash
+php artisan db:seed
+```
+
+
