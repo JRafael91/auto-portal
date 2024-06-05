@@ -70,6 +70,7 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('customer')->label('Cliente')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('total')->label('Total')
                     ->prefix('$')->numeric(decimalPlaces: 2),
+                Tables\Columns\TextColumn::make('user.name')->label('Usuario'),
                 Tables\Columns\TextColumn::make('status')
                     ->badge(),
             ])
