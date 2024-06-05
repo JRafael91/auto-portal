@@ -18,7 +18,13 @@ return new class extends Migration
             $table->string('brand', 50);
             $table->string('model', 50);
             $table->string('year', 5);
+            $table->string('customer');
+            $table->decimal('total', 30)->nullable();
+            $table->text('comments')->nullable();
+            $table->enum('status', ['GENERADO', 'PROCESO', 'FINALIZADO', 'CANCELADO'])->default('GENERADO');
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('SET NULL');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

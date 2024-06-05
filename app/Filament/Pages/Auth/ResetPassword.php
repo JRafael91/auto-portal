@@ -2,14 +2,19 @@
 namespace App\Filament\Pages\Auth;
 
 use Exception;
+use Filament\Facades\Filament;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use Filament\Http\Responses\Auth\Contracts\PasswordResetResponse;
 use Illuminate\Validation\Rules\Password as PasswordRule;
 use Filament\Pages\Auth\PasswordReset\ResetPassword as BaseResetPassword;
+use Illuminate\Auth\Events\PasswordReset;
 use Filament\Notifications\Notification;
 use Filament\Forms\Components\Component;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 
 class ResetPassword extends BaseResetPassword
