@@ -12,6 +12,7 @@
         "afsakar/filament-otp-login": "^1.2",
         "filament/filament": "*",
         "laravel/framework": "^11.0",
+        "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "resend/resend-laravel": "^0.11.0"
     },
