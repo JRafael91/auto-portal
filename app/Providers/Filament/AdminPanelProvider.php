@@ -21,6 +21,7 @@ use Afsakar\FilamentOtpLogin\FilamentOtpLoginPlugin;
 use App\Filament\Pages\Auth\RequestPasswordReset;
 use App\Filament\Pages\Auth\ResetPassword;
 use App\Filament\Pages\Dashboard;
+use App\Filament\Pages\Auth\EditProfile;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -32,7 +33,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('/')
             ->login()
             ->passwordReset(RequestPasswordReset::class, ResetPassword::class)
-            ->profile()
+            ->profile(EditProfile::class)
             ->colors([
                 'primary' => Color::Amber,
             ])
