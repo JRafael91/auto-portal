@@ -20,7 +20,6 @@ services:
       - auto-portal
     depends_on:
       - database
-      - redis
 
   # Database server
   database:
