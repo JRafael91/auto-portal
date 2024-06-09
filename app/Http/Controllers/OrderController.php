@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Exception;
-use App\Models\Order;
+use App\Services\OrderService;
 
 class OrderController extends Controller
 {
+
+    public function __construct(protected OrderService $orderService) {}
     
     public function index(): JsonResponse
     {
         try {
-            $orders = Order::query()->get();
+            $orders = $this->orderService->list();
+
             return response()->json($orders);
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -23,10 +26,8 @@ class OrderController extends Controller
     public function show(string $uid): JsonResponse
     {
         try {
-            $order = Order::query()->where('uid', 'LIKE', '%'.$uid.'%')->first();
-            if (!$order) {
-                throw new Exception(['message' => 'No se encontraron resultados'], 404);
-            }
+            $order = $this->orderService->find($uid);
+
             return response()->json($order);
         } catch (Exception $e) {
             return response()->json(['message' => $e->getMessage()], $e->getCode());
