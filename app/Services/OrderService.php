@@ -14,6 +14,14 @@ class OrderService
         return Order::query()->get();
     }
 
+    public function listByTechnic(int $id): Collection
+    {
+        return Order::query()->where('technic_id', $id)
+            ->where('status', '!=', 'FINALIZADO')
+            ->where('status', '!=', 'CANCELADO')
+            ->get();
+    }
+
     public function find(string $uid): object
     {
         $order = Order::query()->where('uid', 'LIKE', '%'.$uid.'%')->first();

@@ -12,6 +12,7 @@ use Filament\Forms;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\OrderDetail;
+use App\Models\Technic;
 use Filament\Resources\Pages\CreateRecord\Concerns\HasWizard;
 use Illuminate\Database\Eloquent\Model;
 
@@ -34,6 +35,7 @@ class CreateOrder extends CreateRecord
                     Wizard\Step::make('Información general')
                         ->schema([
                             Forms\Components\TextInput::make('uid')
+                                ->label('UID')
                                 ->default('OR-'.$this->countOrder())
                                 ->disabled()
                                 ->dehydrated()
@@ -41,6 +43,16 @@ class CreateOrder extends CreateRecord
                                 ->maxLength(32)
                                 ->unique(ignoreRecord: true)
                                 ->columnSpan(1),
+                            Forms\Components\Select::make('technic_id')
+                                ->label('Técnico')
+                                ->options(Technic::all()->pluck('name', 'id'))
+                                ->native(false)
+                                ->placeholder('Seleccionat técnico')
+                                ->required()
+                                ->searchable()
+                                ->validationMessages([
+                                    'required' => 'Técnico es requerido',
+                                ]),
                             Forms\Components\TextInput::make('customer')
                                 ->label('Nombre de cliente')
                                 ->required()

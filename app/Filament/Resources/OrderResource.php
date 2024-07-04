@@ -6,6 +6,7 @@ use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Technic;
 use App\Enums\OrderStatus;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -71,6 +72,7 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('total')->label('Total')
                     ->prefix('$')->numeric(decimalPlaces: 2),
                 Tables\Columns\TextColumn::make('user.name')->label('Usuario'),
+                Tables\Columns\TextColumn::make('technic.name')->label('Técnico'),
                 Tables\Columns\TextColumn::make('status')
                     ->badge(),
             ])
@@ -117,6 +119,16 @@ class OrderResource extends Resource
                 ->maxLength(32)
                 ->unique(ignoreRecord: true)
                 ->columnSpan(1),
+            Forms\Components\Select::make('technic_id')
+                ->label('Técnico')
+                ->options(Technic::all()->pluck('name', 'id'))
+                ->native(false)
+                ->placeholder('Seleccionat técnico')
+                ->required()
+                ->searchable()
+                ->validationMessages([
+                    'required' => 'Técnico es requerido',
+                ])->columnSpan(1),
             Forms\Components\ToggleButtons::make('status')
                 ->inline()
                 ->options(OrderStatus::class)
@@ -231,5 +243,10 @@ class OrderResource extends Resource
     {
         $count = Order::query()->withTrashed()->count() + 1;
         return str_pad($count, 6, '0', STR_PAD_LEFT);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->orderDesc();
     }
 }

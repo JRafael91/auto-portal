@@ -20,7 +20,19 @@ class OrderController extends Controller
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
+    }
 
+    public function ordersByTechnic(Request $request): JsonResponse
+    {
+        try {
+            $user_id = $request->user()->id;
+
+            $orders = $this->orderService->listByTechnic($user_id);
+
+            return response()->json($orders);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'Error en servidor'], 500);
+        }
     }
 
     public function show(string $uid): JsonResponse

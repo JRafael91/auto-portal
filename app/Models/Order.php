@@ -24,7 +24,8 @@ class Order extends Model
         'total',
         'comments',
         'status',
-        'user_id'
+        'user_id',
+        'technic_id'
     ];
 
     protected $casts = [
@@ -40,4 +41,15 @@ class Order extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function technic(): BelongsTo
+    {
+        return $this->belongsTo(Technic::class);
+    }
+
+    public function scopeOrderDesc($query)
+    {
+        return $query->orderBy('uid', 'DESC');
+    }
 }
+
