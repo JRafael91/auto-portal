@@ -45,4 +45,15 @@ class OrderController extends Controller
             return response()->json(['message' => $e->getMessage()], $e->getCode());
         }
     }
+
+    public function update(Request $request, Order $order): JsonResponse
+    {
+        try{
+            $status = $request->input('status');
+            $this->orderService->updateStatus($order, $status);
+            return response()->json(['message' => 'Estado actualizado correctamente'], 200);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error'], 500);
+        }
+    }
 }

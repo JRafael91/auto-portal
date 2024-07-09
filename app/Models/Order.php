@@ -20,6 +20,7 @@ class Order extends Model
         'brand',
         'model',
         'year',
+        'vehicle',
         'customer',
         'total',
         'comments',
