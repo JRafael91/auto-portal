@@ -30,4 +30,10 @@ class OrderService
         }
         return $order;
     }
+
+    public function updateStatus(Order $order, string $status): void
+    {
+        $order->status = $status;
+        $order->save();
+    }
 }
