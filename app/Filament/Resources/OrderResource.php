@@ -119,16 +119,6 @@ class OrderResource extends Resource
                 ->maxLength(32)
                 ->unique(ignoreRecord: true)
                 ->columnSpan(1),
-            Forms\Components\Select::make('technic_id')
-                ->label('Técnico')
-                ->options(Technic::all()->pluck('name', 'id'))
-                ->native(false)
-                ->placeholder('Seleccionat técnico')
-                ->required()
-                ->searchable()
-                ->validationMessages([
-                    'required' => 'Técnico es requerido',
-                ])->columnSpan(1),
             Forms\Components\ToggleButtons::make('status')
                 ->inline()
                 ->options(OrderStatus::class)
@@ -169,6 +159,28 @@ class OrderResource extends Resource
                     'min' => 'El año del auto no debe ser menor a 1900',
                     'max' => 'El año del auto no debe exceder del 2030'
                 ]),
+            Forms\Components\Select::make('vehicle')
+                ->label(__('Tipo de vehículo'))
+                ->options([
+                    'SEDAN' => 'Sedan',
+                    'TRUCK' => 'Pick-Up',
+                ])
+                ->native(false)
+                ->placeholder('Seleccione un tipo de vehículo')
+                ->required()
+                ->validationMessages([
+                    'required' => 'Tipo de vehículo',
+                ]),
+            Forms\Components\Select::make('technic_id')
+                ->label('Técnico')
+                ->options(Technic::all()->pluck('name', 'id'))
+                ->native(false)
+                ->placeholder('Seleccionat técnico')
+                ->required()
+                ->searchable()
+                ->validationMessages([
+                    'required' => 'Técnico es requerido',
+                ])->columnSpan(1),
             Forms\Components\Textarea::make('comments')
                 ->label(__('Comentarios'))
                 ->rows(6)
