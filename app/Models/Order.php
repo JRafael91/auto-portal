@@ -38,6 +38,11 @@ class Order extends Model
         return $this->hasMany(OrderDetail::class, 'order_id');
     }
 
+    public function images(): HasMany
+    {
+        return $this->hasMany(OrderImage::class, 'order_id');
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
