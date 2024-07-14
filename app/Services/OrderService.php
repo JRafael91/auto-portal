@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Order;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\UploadedFile;
 
 
 class OrderService
@@ -35,6 +36,12 @@ class OrderService
     public function updateStatus(Order $order, string $status): void
     {
         $order->status = $status;
+        $order->save();
+    }
+
+    public function uploadImage(Order $order, UploadedImage $image): void
+    {
+        $order->image = $image->store('orders', 'public');
         $order->save();
     }
 }
