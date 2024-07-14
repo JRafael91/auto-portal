@@ -18,14 +18,21 @@ class OrderService
     public function listByTechnic(int $id): Collection
     {
         return Order::query()->where('technic_id', $id)
-            ->where('status', '!=', 'FINALIZADO')
+            ->where('status', '!=', OrderStatus::Finished)
+            ->where('status', '!=', OrderStatus::Cancelled)
+            ->get();
+    }
+
+    public function listByCustomer(int $id): Collection
+    {
+        return Order::query()->where('customer_id', $id)
             ->where('status', '!=', 'CANCELADO')
             ->get();
     }
 
     public function find(string $uid): object
     {
-        $order = Order::query()->with(['items.product'])
+        $order = Order::query()->with(['items.product', 'images'])
             ->where('uid', 'LIKE', '%'.$uid.'%')->first();
         if (!$order) {
             throw new Exception('No se encontraron resultados', 404);
