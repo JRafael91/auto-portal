@@ -5,6 +5,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Exception;
 use App\Services\OrderService;
+use App\Models\Order;
 
 class OrderController extends Controller
 {
@@ -54,6 +55,23 @@ class OrderController extends Controller
             return response()->json(['message' => 'Estado actualizado correctamente'], 200);
         } catch (Exception $e) {
             return response()->json(['message' => 'Ha ocurrido un error'], 500);
+        }
+    }
+
+    public function uploadImage(Request $request, Order $order): JsonResponse
+    {
+        $request->validate(
+            ['image' => 'required'],
+            ['image.required' => 'La imagen es requerida'],
+        );
+
+        try {
+            $image = $request->file('image');
+            $this->orderService->uploadImage($order, $image);
+            return response()->json(['message' => 'Imagen guardada correctamente'], 200);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error'], 500);
+
         }
     }
 }

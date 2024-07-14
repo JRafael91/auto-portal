@@ -16,6 +16,8 @@ Route::prefix('v1')->group(function () {
         Route::get('orders', [ OrderController::class, 'index']);
         Route::get('orders/technic', [ OrderController::class, 'ordersByTechnic']);
         Route::get('orders/{uid}', [ OrderController::class, 'show']);
+        Route::post('orders/upload_image/{order}', [OrderController::class, 'uploadImage']);
+        Route::put('orders/{order}', [OrderController::class, 'update']);
     });
 
 });
