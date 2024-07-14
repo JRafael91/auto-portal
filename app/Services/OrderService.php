@@ -24,7 +24,8 @@ class OrderService
 
     public function find(string $uid): object
     {
-        $order = Order::query()->where('uid', 'LIKE', '%'.$uid.'%')->first();
+        $order = Order::query()->with(['items.product'])
+            ->where('uid', 'LIKE', '%'.$uid.'%')->first();
         if (!$order) {
             throw new Exception('No se encontraron resultados', 404);
         }
