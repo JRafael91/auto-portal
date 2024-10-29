@@ -76,5 +76,19 @@ php artisan make:filament-user
 ```bash
 php artisan db:seed
 ```
+### 9.- Pantallas
+- Login, por medio de un correo y contraseña, al cuál se le manda un correo con un código OTP.
+![Captura desde 2024-10-28 21-22-35](https://github.com/user-attachments/assets/ecac1858-3504-4ea7-9944-757656590460)
+- Dashboard, donde se muestra el conteo de las órdenes y el monto total por mes. 
+![Captura desde 2024-10-28 21-25-22](https://github.com/user-attachments/assets/999c22b7-d9af-46fb-b1e6-14124aa2e803)
+- CRUD de Productos
+![Captura desde 2024-10-28 21-25-50](https://github.com/user-attachments/assets/99d6c195-cfe4-4128-af8a-a167fa85da71)
+- CRUD de Órdenes, también se asigna al técnico asignado para esa orden.
+![Captura desde 2024-10-28 21-26-24](https://github.com/user-attachments/assets/78c52127-666e-4a00-b109-e2f791b3d3a7)
+![Captura desde 2024-10-28 21-26-36](https://github.com/user-attachments/assets/34700874-aca7-4850-a8dc-9892daeae5ba)
+
+### Otras funcionalidades
+- Actualizar información de usuario y avatar.
+- CRUD de técnicos, los cuáles tienen acceso a la aplicacion móvil.
 
 
